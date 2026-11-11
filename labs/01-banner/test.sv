@@ -27,12 +27,13 @@ module test;
   // instructions memory 
   rom instr_mem(pc, instr);
 
-  // data memory 
-  ram data_mem(clk, memwrite & isRAM, addr, writedata, ram_readdata);
-
   // memory-mapped I/O
   wire isIO  = addr[8]; // 0x0000_0100
   wire isRAM = !isIO;
+
+  // data memory
+  ram data_mem(clk, memwrite & isRAM, addr, writedata, ram_readdata);
+
   localparam IO_SWITCHES_bit = 5; // 0x0000_0120
   localparam IO_LEDS_bit = 2; // 0x0000_0104
   localparam IO_HEX_bit  = 3; // 0x0000_0108
